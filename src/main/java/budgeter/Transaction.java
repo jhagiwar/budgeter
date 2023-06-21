@@ -5,15 +5,16 @@ import java.time.LocalDate;
 public class Transaction {
     private int transactionID;
     private LocalDate date;
-    private double total;
+    private LocalDate weekStartDate;
+    private Double total;
     private int categoryID;
     private String type;
     private String title;
     private String vendor;
-    private String notes;
 
-    public Transaction(int year, int month, int day, int totalArg, String typeArg, String vendorArg) {
+    public Transaction(int year, int month, int day, Double totalArg, String typeArg, String vendorArg) {
         date = LocalDate.of(year, month, day);
+        weekStartDate = date.minusDays(date.getDayOfWeek().getValue() - 1);
         total = totalArg;
         type = typeArg;
         vendor = vendorArg;
@@ -23,5 +24,7 @@ public class Transaction {
         System.out.println("Transaction Created!");
     }
 
-
+    public void setCategoryID(int categoryID) {
+        this.categoryID = categoryID;
+    }
 }

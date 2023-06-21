@@ -5,14 +5,14 @@ import java.util.ArrayList;
 
 public class WeeklyCategory {
     private CategoryId categoryID;
-    private double weeklyBudget;
+    private Double weeklyBudget;
     private String name;
     private LocalDate startDate;
     private LocalDate endDate;
 
     private ArrayList<Transaction> transactions;
 
-    private double transactionsTotal;
+    private Double transactionsTotal;
 
     public WeeklyCategory(int year, int month, int day, CategoryId categoryIDArg) {
         startDate = LocalDate.of(year, month, day);
@@ -32,7 +32,7 @@ public class WeeklyCategory {
                 weeklyBudget = 5.00;
                 name = "Tea";
             case FOOD_DELIVERY:
-                weeklyBudget = 0;
+                weeklyBudget = 0.00;
                 name = "Food Delivery";
             case DINING_OUT:
                 weeklyBudget = 20.00;
@@ -58,11 +58,9 @@ public class WeeklyCategory {
             case MEDICAL:
                 weeklyBudget = 11.00;
                 name = "Medical";
-
             case HOME:
                 weeklyBudget = 10.00;
                 name = "Home";
-
             case OTHER:
                 weeklyBudget = 5.00;
                 name = "Other";
