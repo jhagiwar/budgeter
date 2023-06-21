@@ -1,0 +1,19 @@
+package budgeter;
+
+public enum CategoryId {
+    SUBSCRIPTIONS,
+    GROCERIES,
+    COFFEE,
+    TEA,
+    FOOD_DELIVERY,
+    DINING_OUT,
+    TOILETRIES,
+    ELECTRIC,
+    FUN_AND_ACTIVITIES,
+    PUBLIC_TRANSPORTATION,
+    UBER_AND_LYFT,
+    CLOTHES,
+    MEDICAL,
+    HOME,
+    OTHER
+}
