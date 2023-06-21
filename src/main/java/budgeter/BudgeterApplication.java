@@ -1,6 +1,6 @@
-package hello;
+package budgeter;
 
-public class HelloWorld {
+public class BudgeterApplication {
 	public static void main(String[] args) {
 		Greeter greeter = new Greeter();
 		System.out.println(greeter.sayHello());

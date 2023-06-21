@@ -1,7 +1,7 @@
-package hello;
+package budgeter;
 
 public class Greeter {
 	public String sayHello() {
-		return "Hello world!";
+		return "Hello Jadey!";
 	}
 }
