@@ -72,4 +72,9 @@ public class WeeklyCategory {
         //        check current date against start and end
         //  update transaction total
     }
+
+    public String[] getWeeklyCategorySummary() {
+        String[] ret = new String[]{name, weeklyBudget.toString(), transactionsTotal.toString()};
+        return ret;
+    }
 }
