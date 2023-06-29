@@ -35,7 +35,7 @@ public class BudgeterApplication {
 //        String userName = myObj.nextLine();  // Read user input
 //        System.out.println("Username is: " + userName);  // Output user input
         System.out.println("Lets parse CSV");
-        ArrayList<Transaction> list = parseCapitalOneTransactionCSV("/Users/jadeyhagiwara/CodingProjects/budgeter/data/2023-06-28_transaction_download.csv", LocalDate.of(2001, 9, 1));
+        ArrayList<Transaction> list = parseDiscoverTransactionsCSV("/Users/jadeyhagiwara/CodingProjects/budgeter/data/DFS-Search-20230629.csv", LocalDate.of(2001, 9, 1));
         System.out.println(list.get(0).getTotal());
         System.out.println(list.size());
 
@@ -83,7 +83,7 @@ public class BudgeterApplication {
                 }
                 Transaction transaction = new Transaction(Integer.parseInt(date[0]), month, day, total, "Capital One", transactionLine[3]);
                 // WHEN U USE LAST UPDATED DO NOT ADD FOR THAT DATE
-                System.out.println(transaction.getTotal());
+//                System.out.println(transaction.getTotal());
                 if (!transaction.getDate().isBefore(lastUpdated) || transaction.getDate().isEqual(lastUpdated)) {
                     transactionsToAdd.add(transaction);
                 }
@@ -94,4 +94,36 @@ public class BudgeterApplication {
         return transactionsToAdd;
     }
 
+    public static ArrayList<Transaction> parseDiscoverTransactionsCSV(String fileName, LocalDate lastUpdated) {
+        String line = "";
+        String splitBy = ",";
+        ArrayList<Transaction> transactionsToAdd = new ArrayList<Transaction>();
+        try {
+//parsing a CSV file into BufferedReader class constructor
+            BufferedReader br = new BufferedReader(new FileReader(fileName));
+            // for table header
+            br.readLine();
+            while ((line = br.readLine()) != null)   //returns a Boolean value
+            {
+
+                String[] transactionLine = line.split(splitBy);    // use comma as separator
+                String[] date = transactionLine[0].split("/");
+                String strPattern = "^0+(?!$)";
+                int year = Integer.parseInt(date[2].replaceAll(strPattern, ""));
+                int month = Integer.parseInt(date[0].replaceAll(strPattern, ""));
+                int day = Integer.parseInt(date[1].replaceAll(strPattern, ""));
+                Double total = Double.valueOf(transactionLine[3]);
+                Transaction transaction = new Transaction(year, month, day, total, "Discover", transactionLine[3]);
+                // WHEN U USE LAST UPDATED DO NOT ADD FOR THAT DATE
+//                System.out.println(transaction.getTotal());
+                if (!transaction.getDate().isBefore(lastUpdated) || transaction.getDate().isEqual(lastUpdated)) {
+                    transactionsToAdd.add(transaction);
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return transactionsToAdd;
+    }
 }
