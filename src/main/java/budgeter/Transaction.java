@@ -35,4 +35,12 @@ public class Transaction {
     public LocalDate getWeekStartDate() {
         return weekStartDate;
     }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public Double getTotal() {
+        return total;
+    }
 }
