@@ -1,13 +1,14 @@
 package budgeter;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashMap; // import the HashMap class
 
 public class WeeklyReview {
 
     HashMap<CategoryId, WeeklyCategory> categoryIdToWeeklyCategory = new HashMap<CategoryId, WeeklyCategory>();
-    private Double weeklyTotalBudget;
-    private Double weeklyTotalActual;
+    private BigDecimal weeklyTotalBudget;
+    private BigDecimal weeklyTotalActual;
     private LocalDate startDate;
     private LocalDate endDate;
 

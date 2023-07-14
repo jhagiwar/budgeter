@@ -1,5 +1,6 @@
 package budgeter;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;  // Import the Scanner class
@@ -25,19 +26,14 @@ public class BudgeterApplication {
     }
 
     public static void main(String[] args) {
-        Greeter greeter = new Greeter();
-        System.out.println(greeter.sayHello());
-//		if getLastUpdated /= today call setLastUpdated
-//		System.out.println("Updating Everything");
-//        System.out.println("Ready to review");
-//        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+//        System.out.println("Updating Everything");
+        System.out.println("Ready to review");
+        System.out.println(CategoryId.valueOf("DINING_OUT"));
+        System.out.println(CategoryId.valueOf("DINING_OUT") == CategoryId.DINING_OUT);
+        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
 //        System.out.println("Enter username");
 //        String userName = myObj.nextLine();  // Read user input
 //        System.out.println("Username is: " + userName);  // Output user input
-        System.out.println("Lets parse CSV");
-        ArrayList<Transaction> list = parseDiscoverTransactionsCSV("/Users/jadeyhagiwara/CodingProjects/budgeter/data/DFS-Search-20230629.csv", LocalDate.of(2001, 9, 1));
-        System.out.println(list.get(0).getTotal());
-        System.out.println(list.size());
 
     }
 
@@ -69,17 +65,17 @@ public class BudgeterApplication {
                     break;
                 }
                 String[] transactionLine = line.split(splitBy);    // use comma as separator
-                System.out.println(transactionLine);
+//                System.out.println(transactionLine);
 
                 String[] date = transactionLine[0].split("-");
                 String strPattern = "^0+(?!$)";
                 int month = Integer.parseInt(date[1].replaceAll(strPattern, ""));
                 int day = Integer.parseInt(date[2].replaceAll(strPattern, ""));
-                Double total = 0.0;
+                BigDecimal total = BigDecimal.valueOf(0.0);
                 if (transactionLine.length == 7) {
-                    total = -1 * Double.valueOf(transactionLine[6]);
+                    total = BigDecimal.valueOf(-1 * Double.valueOf(transactionLine[6]));
                 } else {
-                    total = Double.valueOf(transactionLine[5]);
+                    total = BigDecimal.valueOf(Double.valueOf(transactionLine[5]));
                 }
                 Transaction transaction = new Transaction(Integer.parseInt(date[0]), month, day, total, "Capital One", transactionLine[3]);
                 // WHEN U USE LAST UPDATED DO NOT ADD FOR THAT DATE
@@ -112,7 +108,7 @@ public class BudgeterApplication {
                 int year = Integer.parseInt(date[2].replaceAll(strPattern, ""));
                 int month = Integer.parseInt(date[0].replaceAll(strPattern, ""));
                 int day = Integer.parseInt(date[1].replaceAll(strPattern, ""));
-                Double total = Double.valueOf(transactionLine[3]);
+                BigDecimal total = BigDecimal.valueOf(Double.valueOf(transactionLine[3]));
                 Transaction transaction = new Transaction(year, month, day, total, "Discover", transactionLine[3]);
                 // WHEN U USE LAST UPDATED DO NOT ADD FOR THAT DATE
 //                System.out.println(transaction.getTotal());

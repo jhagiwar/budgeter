@@ -1,5 +1,6 @@
 package budgeter;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import static org.junit.Assert.*;
@@ -8,8 +9,8 @@ import org.junit.Test;
 
 public class TransactionTest {
 
-    private Transaction transaction1 = new Transaction(2023, 6, 21, 20.59, "Capital One", "Goma Tei");
-    private Transaction transaction2 = new Transaction(2023, 5, 1, 5.99, "Discover", "Taste Tea");
+    private Transaction transaction1 = new Transaction(2023, 6, 21, BigDecimal.valueOf(20.59), "Capital One", "Goma Tei");
+    private Transaction transaction2 = new Transaction(2023, 5, 1, BigDecimal.valueOf(5.99), "Discover", "Taste Tea");
 
     @Test
     public void settingCategoryId() {
@@ -23,4 +24,6 @@ public class TransactionTest {
         assertTrue(transaction1.getWeekStartDate().isEqual(LocalDate.of(2023, 6, 19)));
         assertTrue(transaction2.getWeekStartDate().isEqual(LocalDate.of(2023, 5, 1)));
     }
+
+
 }
