@@ -19,8 +19,8 @@ public enum CategoryId {
     HOME,
     OTHER;
 
-    public Integer catIdToIntVal(CategoryId catId) {
-        switch (catId) {
+    public Integer catIdToIntVal() {
+        switch (this) {
             case SUBSCRIPTIONS:
                 return 0;
             case GROCERIES:
@@ -91,8 +91,8 @@ public enum CategoryId {
         throw new RuntimeException("not a valid category id");
     }
 
-    public String CatIdtoString(CategoryId catId) {
-        switch (catId) {
+    public String CatIdtoString() {
+        switch (this) {
             case SUBSCRIPTIONS:
                 return "Subscriptions";
             case GROCERIES:
