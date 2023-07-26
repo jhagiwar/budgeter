@@ -46,4 +46,20 @@ public class Transaction {
         return total;
     }
 
+    public String getTransactionValuesDatabaseString(CategoryId categoryId) {
+        String res = "INSERT INTO transactions (date,weekStartDate,total,categoryId,paymentType,title,vendor)\n" +
+                "VALUES";
+        res = res + "(";
+//        `id`, `date`, `weekStartDate`, `total`, `categoryId`, `paymentType`, `title`, `vendor`
+        res = res + "'" + date.toString() + "'" + ",";
+        res = res + "'" + weekStartDate.toString() + "'" + ",";
+        res = res + total.toString() + ",";
+        res = res + "'" + categoryId.CatIdtoString() + "'" + ",";
+        res = res + "'" + paymentType + "'" + ",";
+        res = res + "'" + title + "'" + ",";
+        res = res + "'" + vendor + "'";
+        res = res + ")";
+        return res;
+    }
+
 }

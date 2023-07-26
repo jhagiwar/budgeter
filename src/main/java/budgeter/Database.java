@@ -24,8 +24,7 @@ public class Database {
             "PRIMARY KEY (id)," +
             ")";
 
-
-    public static void main(String[] args) throws SQLException {
+    public static void create_transaction_table() {
         // load and register JDBC driver for MySQL
         String url = "jdbc:mysql://localhost:3306/budget";
         String username = "root";
@@ -47,12 +46,37 @@ public class Database {
                     "vendor VARCHAR(50) NOT NULL," +
                     "PRIMARY KEY (id)" +
                     ")";
-            System.out.println(sql);
-
             stmt.executeUpdate(sql);
             System.out.println("Created table in given database...");
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void insert_transaction() {
+        // load and register JDBC driver for MySQL
+        String url = "jdbc:mysql://localhost:3306/budget";
+        String username = "root";
+        String password = "root";
+
+        System.out.println("Connecting database...");
+
+        try {
+            Connection conn = DriverManager.getConnection(url, username, password);
+            Statement stmt = conn.createStatement();
+            //        `id`, `date`, `weekStartDate`, `total`, `categoryId`, `paymentType`, `title`, `vendor`
+            String sql = "INSERT INTO transactions (date,weekStartDate,total,categoryId,paymentType,title,vendor)";
+            stmt.executeUpdate(sql);
+            System.out.println("Created table in given database...");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void main(String[] args) throws SQLException {
+//        CREATE TABLE IF THERE ISNT ONE
+        create_transaction_table();
+
     }
 }

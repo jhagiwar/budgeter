@@ -28,9 +28,11 @@ public class BudgeterApplication {
     public static void main(String[] args) {
 //        System.out.println("Updating Everything");
         System.out.println("Ready to review");
-        System.out.println(CategoryId.valueOf("DINING_OUT"));
-        System.out.println(CategoryId.valueOf("DINING_OUT") == CategoryId.DINING_OUT);
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+//        6 and 11 respectively
+        ArrayList<Transaction> capOneList = parseCapitalOneTransactionCSV("/Users/jadeyhagiwara/CodingProjects/budgeter/data/capTestOne.csv", LocalDate.of(2001, 1, 1));
+        ArrayList<Transaction> discoList = parseDiscoverTransactionsCSV("/Users/jadeyhagiwara/CodingProjects/budgeter/data/discoTestOne.csv", LocalDate.of(2001, 1, 1));
+        System.out.println(capOneList.get(0).getTransactionValuesDatabaseString(CategoryId.DINING_OUT));
 //        System.out.println("Enter username");
 //        String userName = myObj.nextLine();  // Read user input
 //        System.out.println("Username is: " + userName);  // Output user input
