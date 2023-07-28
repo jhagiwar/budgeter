@@ -1,12 +1,12 @@
 package budgeter;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Scanner;  // Import the Scanner class
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class BudgeterApplication {
@@ -124,4 +124,5 @@ public class BudgeterApplication {
         }
         return transactionsToAdd;
     }
+
 }
