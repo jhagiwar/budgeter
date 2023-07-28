@@ -102,6 +102,18 @@ const CSVSelector = () => {
                         setTransactionsAmount(oldArray => [...oldArray, parsedData[i]["Amount"]]);
                     }
                 }
+            } else {
+                for (let i = 0; i < parsedData.length - 2; i++) {
+                    if (parsedData[i]["Description"] !== undefined) {
+                        console.log(parsedData);
+                        setTransactionsCompany(oldArray => [...oldArray, parsedData[i]["Description"]]);
+                        if (parsedData[i]["Debit"] === "") {
+                            setTransactionsAmount(oldArray => [...oldArray, 0 - parsedData[i]["Credit"]]);
+                        } else {
+                            setTransactionsAmount(oldArray => [...oldArray, parsedData[i]["Debit"]]);
+                        }
+                    }
+                }
             }
         };
         reader.readAsText(file);
@@ -133,6 +145,7 @@ const CSVSelector = () => {
             <div>
                 {transactionsIndex < transactionsAmount.length && indexToSingleTransactionDisplay(transactionsIndex)}
                 {transactionsIndex < transactionsAmount.length && <div className="categoryButtons">
+                    <h2>{selectedCategory}</h2>
                     <button onClick={() => setSelectedCategory("Subscriptions")}>Subscriptions</button>
                     <button onClick={() => setSelectedCategory("Groceries")}>Groceries</button>
                     <button onClick={() => setSelectedCategory("Coffee")}>Coffee</button>
