@@ -1,6 +1,5 @@
 import logo from './logo.svg';
 import './App.css';
-import CategoryButton from './CategoryButton';
 import CSVSelector from './CSVSelector';
 
 function App() {
@@ -12,7 +11,6 @@ function App() {
       <div className='CSVParser'>
         <CSVSelector />
       </div>
-      <CategoryButton />
     </div>
   );
 }

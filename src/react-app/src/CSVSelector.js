@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, optionsState } from "react";
 import Papa from "papaparse";
+import { ButtonGroup } from "react-bootstrap";
 
 // Allowed extensions for input file
 const allowedExtensions = ["csv"];
@@ -19,9 +20,18 @@ const CSVSelector = () => {
     }
 
     // This state will store the Category Ids,CompanyNames, and Amount in order 
-    const [transactionsIds, setTransationsIds] = useState([]);
-    const [transactionsCompany, setTransationsCompany] = useState([]);
-    const [transactionsAmount, setTransationsAmount] = useState([]);
+    const [transactionsCompany, setTransactionsCompany] = useState([]);
+    const [transactionsAmount, setTransactionsAmount] = useState([]);
+
+    const [transactionsCategory, setTransactionsCategory] = useState([]);
+
+    const [transactionsIndex, setTransactionsIndex] = useState(0);
+
+    function handleNextTransaction() {
+        setTransactionsCategory(old => [...old, selectedCategory]);
+        setTransactionsIndex(old => old + 1);
+    }
+    const [selectedCategory, setSelectedCategory] = useState("");
 
     // This state will store the parsed data
     const [data, setData] = useState([]);
@@ -32,6 +42,19 @@ const CSVSelector = () => {
 
     // It will store the file uploaded by the user
     const [file, setFile] = useState("");
+
+    function indexToSingleTransactionDisplay(index) {
+
+        return (
+            <div className="SingleTransactionDisplay">
+                <h3>Company:</h3>
+                <p>{transactionsCompany[index]}</p>
+                <h3>Amount:</h3>
+                <p>{transactionsAmount[index]}</p>
+            </div>
+        )
+    }
+
 
     // This function will be called when
     // the file input changes
@@ -75,8 +98,8 @@ const CSVSelector = () => {
             if (isDiscover) {
                 for (let i = 0; i < parsedData.length - 1; i++) {
                     if (parsedData[i]["Description"] !== undefined) {
-                        setTransationsCompany(oldArray => [...oldArray, parsedData[i]["Description"]]);
-                        setTransationsAmount(oldArray => [...oldArray, parsedData[i]["Amount"]]);
+                        setTransactionsCompany(oldArray => [...oldArray, parsedData[i]["Description"]]);
+                        setTransactionsAmount(oldArray => [...oldArray, parsedData[i]["Amount"]]);
                     }
                 }
             }
@@ -106,15 +129,35 @@ const CSVSelector = () => {
                     <button onClick={handleParse}>Parse</button>
                 </div>
             </div>
-            <div style={{ marginTop: "3rem" }}>
-                {error ? error : transactionsCompany.map((col,
-                    idx) => <div key={idx}>{col}</div>)}
+
+            <div>
+                {transactionsIndex < transactionsAmount.length && indexToSingleTransactionDisplay(transactionsIndex)}
+                {transactionsIndex < transactionsAmount.length && <div className="categoryButtons">
+                    <button onClick={() => setSelectedCategory("Subscriptions")}>Subscriptions</button>
+                    <button onClick={() => setSelectedCategory("Groceries")}>Groceries</button>
+                    <button onClick={() => setSelectedCategory("Coffee")}>Coffee</button>
+                    <button onClick={() => setSelectedCategory("Tea")}>Tea</button>
+                    <button onClick={() => setSelectedCategory("Food Delivery")}>Food Dilivery</button>
+                    <button onClick={() => setSelectedCategory("Dining Out")}>Dining Out</button>
+                    <button onClick={() => setSelectedCategory("Toiletries")}>Toiletries</button>
+                    <button onClick={() => setSelectedCategory("Electricity/Wifi Bill")}>Electricity/Wifi Bill</button>
+                    <button onClick={() => setSelectedCategory("Fun/Activities")}>Activities</button>
+                    <button onClick={() => setSelectedCategory("Public Transportation")}>Public Transportation</button>
+                    <button onClick={() => setSelectedCategory("Uber/Lyft/Other")}>Uber/Lyft/Other</button>
+                    <button onClick={() => setSelectedCategory("Clothes")}>Clothes</button>
+                    <button onClick={() => setSelectedCategory("Medical")}>Medical</button>
+                    <button onClick={() => setSelectedCategory("Home")}>Home</button>
+                    <button onClick={() => setSelectedCategory("Other")}>Other</button>
+                </div >}
+                {transactionsIndex < transactionsAmount.length && <button onClick={handleNextTransaction}>Next Transaction</button>}
+                {transactionsIndex === transactionsAmount.length - 1 && <h2>Done! Categories Below</h2>}
+                {transactionsIndex === transactionsAmount.length - 1 && <div style={{ marginTop: "3rem" }}>
+                    {error ? error : transactionsCategory.map((col,
+                        idx) => <div key={idx}>{col}</div>)}
+                </div>}
             </div>
-            <div style={{ marginTop: "3rem" }}>
-                {error ? error : transactionsAmount.map((col,
-                    idx) => <div key={idx}>{col}</div>)}
-            </div>
-        </div>
+
+        </div >
     );
 };
 

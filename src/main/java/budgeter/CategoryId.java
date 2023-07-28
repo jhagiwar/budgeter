@@ -108,7 +108,7 @@ public enum CategoryId {
             case TOILETRIES:
                 return "Toiletries";
             case ELECTRIC:
-                return "Electricity Bill";
+                return "Electricity/Wifi Bill";
             case FUN_AND_ACTIVITIES:
                 return "Fun/Activities";
             case PUBLIC_TRANSPORTATION:
@@ -144,7 +144,7 @@ public enum CategoryId {
                 return DINING_OUT;
             case "Toiletries":
                 return TOILETRIES;
-            case "Electricity Bill":
+            case "Electricity/Wifi Bill":
                 return ELECTRIC;
             case "Fun/Activities":
                 return FUN_AND_ACTIVITIES;
