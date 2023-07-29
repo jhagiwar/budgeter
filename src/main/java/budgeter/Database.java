@@ -43,7 +43,7 @@ public class Database {
                     "categoryId VARCHAR(50) NOT NULL," +
                     "paymentType VARCHAR(50) NOT NULL," +
                     "title VARCHAR(50) NOT NULL," +
-                    "vendor VARCHAR(50) NOT NULL," +
+                    "vendor VARCHAR(200) NOT NULL," +
                     "PRIMARY KEY (id)" +
                     ")";
             stmt.executeUpdate(sql);
