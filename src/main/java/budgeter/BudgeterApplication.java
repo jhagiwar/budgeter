@@ -25,23 +25,41 @@ public class BudgeterApplication {
         ;
     }
 
+
+    public static void addToDatabase() {
+        Scanner myObj = new Scanner(System.in);
+        System.out.println("Enter Transaction CSV Filename");
+        String filename = myObj.nextLine();  // Read user input
+        System.out.println("Is this Discover or Capital One? D/C");
+        Scanner myObj2 = new Scanner(System.in);  // Create a Scanner object
+        String ttype = myObj2.nextLine();  // Read user input
+        ArrayList<Transaction> transactions = new ArrayList<>();
+        if (ttype.equals("D")) {
+            transactions = parseDiscoverTransactionsCSV(filename, LocalDate.now());
+        } else if (ttype.equals("C")) {
+            transactions = parseCapitalOneTransactionCSV(filename, LocalDate.now());
+        } else {
+            System.out.println("Error please quit and restart");
+        }
+        System.out.println("Enter Categories CSV Filename");
+        Scanner myObj3 = new Scanner(System.in);  // Create a Scanner object
+        String catfilename = myObj3.nextLine();  // Read user input
+        ArrayList<CategoryId> categories = parseCategoryCSV(catfilename);
+
+
+        for (int i = 0; i < transactions.size(); i++) {
+            Database.insert_transaction(transactions.get(i).getTransactionValuesDatabaseString(categories.get(i)));
+        }
+    }
+
     public static void main(String[] args) {
-//        System.out.println("Updating Everything");
-        System.out.println("Ready to review");
-        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-//        6 and 11 respectively
-        ArrayList<Transaction> capOneList = parseCapitalOneTransactionCSV("/Users/jadeyhagiwara/CodingProjects/budgeter/data/capTestOne.csv", LocalDate.of(2001, 1, 1));
-        ArrayList<Transaction> discoList = parseDiscoverTransactionsCSV("/Users/jadeyhagiwara/CodingProjects/budgeter/data/discoTestOne.csv", LocalDate.of(2001, 1, 1));
-        System.out.println(capOneList.get(0).getTransactionValuesDatabaseString(CategoryId.DINING_OUT));
-//        System.out.println("Enter username");
-//        String userName = myObj.nextLine();  // Read user input
-//        System.out.println("Username is: " + userName);  // Output user input
+        addToDatabase();
 
     }
 
-    public LocalDate getLastUpdated() {
-        return lastUpdated;
-    }
+//    public LocalDate getLastUpdated() {
+//        return lastUpdated;
+//    }
 
     public void setLastUpdated(LocalDate newLastUpdated) {
 //		ALL THE UPDATE FUNCTIONS
@@ -49,7 +67,7 @@ public class BudgeterApplication {
 
 //		* update all weekly categories that need updating/recalculating
 //		* update all weekly reviews that need updating/recalculating
-        this.lastUpdated = newLastUpdated;
+//        this.lastUpdated = newLastUpdated;
     }
 
     public static ArrayList<Transaction> parseCapitalOneTransactionCSV(String fileName, LocalDate lastUpdated) {
@@ -82,9 +100,9 @@ public class BudgeterApplication {
                 Transaction transaction = new Transaction(Integer.parseInt(date[0]), month, day, total, "Capital One", transactionLine[3]);
                 // WHEN U USE LAST UPDATED DO NOT ADD FOR THAT DATE
 //                System.out.println(transaction.getTotal());
-                if (!transaction.getDate().isBefore(lastUpdated) || transaction.getDate().isEqual(lastUpdated)) {
-                    transactionsToAdd.add(transaction);
-                }
+//                if (!transaction.getDate().isBefore(lastUpdated) || transaction.getDate().isEqual(lastUpdated)) {
+                transactionsToAdd.add(transaction);
+//                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -111,12 +129,12 @@ public class BudgeterApplication {
                 int month = Integer.parseInt(date[0].replaceAll(strPattern, ""));
                 int day = Integer.parseInt(date[1].replaceAll(strPattern, ""));
                 BigDecimal total = BigDecimal.valueOf(Double.valueOf(transactionLine[3]));
-                Transaction transaction = new Transaction(year, month, day, total, "Discover", transactionLine[3]);
+                Transaction transaction = new Transaction(year, month, day, total, "Discover", transactionLine[2]);
                 // WHEN U USE LAST UPDATED DO NOT ADD FOR THAT DATE
 //                System.out.println(transaction.getTotal());
-                if (!transaction.getDate().isBefore(lastUpdated) || transaction.getDate().isEqual(lastUpdated)) {
-                    transactionsToAdd.add(transaction);
-                }
+//                if (!transaction.getDate().isBefore(lastUpdated) || transaction.getDate().isEqual(lastUpdated)) {
+                transactionsToAdd.add(transaction);
+//                }
             }
 
         } catch (IOException e) {
@@ -124,5 +142,31 @@ public class BudgeterApplication {
         }
         return transactionsToAdd;
     }
+
+    public static ArrayList<CategoryId> parseCategoryCSV(String fileName) {
+        String line = "";
+        String splitBy = ",";
+        ArrayList<CategoryId> categoryIds = new ArrayList<CategoryId>();
+
+        try {
+//parsing a CSV file into BufferedReader class constructor
+            BufferedReader br = new BufferedReader(new FileReader(fileName));
+            // for table header
+            while ((line = br.readLine()) != null)   //returns a Boolean value
+            {
+                String[] catLine = line.split(splitBy);    // use comma as separator
+                for (int i = 0; i < catLine.length; i++) {
+                    categoryIds.add(CategoryId.stringToCatId(catLine[i]));
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        return categoryIds;
+    }
+
 
 }

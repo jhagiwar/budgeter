@@ -26,7 +26,7 @@ public class Database {
 
     public static void create_transaction_table() {
         // load and register JDBC driver for MySQL
-        String url = "jdbc:mysql://localhost:3306/budget";
+        String url = "jdbc:mysql://localhost:3306/budget?useSSL=false&serverTimezone=UTC";
         String username = "root";
         String password = "root";
 
@@ -53,9 +53,9 @@ public class Database {
         }
     }
 
-    public static void insert_transaction() {
+    public static void insert_transaction(String transactionSQLString) {
         // load and register JDBC driver for MySQL
-        String url = "jdbc:mysql://localhost:3306/budget";
+        String url = "jdbc:mysql://localhost:3306/budget?useSSL=false&serverTimezone=UTC";
         String username = "root";
         String password = "root";
 
@@ -65,9 +65,9 @@ public class Database {
             Connection conn = DriverManager.getConnection(url, username, password);
             Statement stmt = conn.createStatement();
             //        `id`, `date`, `weekStartDate`, `total`, `categoryId`, `paymentType`, `title`, `vendor`
-            String sql = "INSERT INTO transactions (date,weekStartDate,total,categoryId,paymentType,title,vendor)";
+            String sql = transactionSQLString;
             stmt.executeUpdate(sql);
-            System.out.println("Created table in given database...");
+//            System.out.println("Created table in given database...");
         } catch (Exception e) {
             e.printStackTrace();
         }

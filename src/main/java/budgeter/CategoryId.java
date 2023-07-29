@@ -127,7 +127,7 @@ public enum CategoryId {
         throw new RuntimeException("not a valid categoryId");
     }
 
-    public CategoryId stringToCatId(String str) {
+    public static CategoryId stringToCatId(String str) {
 
         switch (str) {
             case "Subscriptions":

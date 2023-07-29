@@ -109,9 +109,8 @@ const CSVSelector = () => {
                     }
                 }
             } else {
-                for (let i = 0; i < parsedData.length - 2; i++) {
-                    if (parsedData[i]["Description"] !== undefined) {
-                        console.log(parsedData);
+                for (let i = 0; i < parsedData.length - 1; i++) {
+                    if (parsedData[i]["Transaction Date"] != "") {
                         setTransactionsCompany(oldArray => [...oldArray, parsedData[i]["Description"]]);
                         if (parsedData[i]["Debit"] === "") {
                             setTransactionsAmount(oldArray => [...oldArray, 0 - parsedData[i]["Credit"]]);
@@ -208,14 +207,16 @@ const CSVSelector = () => {
                     <button onClick={() => setSelectedCategory("Home")}>Home</button>
                     <button onClick={() => setSelectedCategory("Other")}>Other</button>
                 </div >}
+                {console.log(transactionsAmount.length)}
+                {console.log(transactionsAmount)}
                 {transactionsIndex < transactionsAmount.length && <button onClick={handleNextTransaction}>Next Transaction</button>}
-                {transactionsIndex === transactionsAmount.length - 1 && <h2>Done! Categories Below</h2>}
-                {transactionsIndex === transactionsAmount.length - 1 && <div style={{ marginTop: "3rem" }}>
+                {transactionsIndex === transactionsAmount.length && <h2>Done! Categories Below</h2>}
+                {transactionsIndex === transactionsAmount.length && <div style={{ marginTop: "3rem" }}>
                     {error ? error : transactionsCategory.map((col,
                         idx) => <div key={idx}>{col}</div>)}
                 </div>}
                 <div>
-                    {transactionsIndex === transactionsAmount.length - 1 && <button onClick={() => exportToCsv("categories_for_" + file.filename, transactionsCategory)}>Download CSV of Categories</button>}
+                    {transactionsIndex === transactionsAmount.length && <button onClick={() => exportToCsv("categories_for_" + file.filename, transactionsCategory)}>Download CSV of Categories</button>}
                 </div>
             </div>
 
