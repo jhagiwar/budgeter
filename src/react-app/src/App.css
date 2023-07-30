@@ -1,4 +1,17 @@
+:root {
+  --darkest-theme-color: #00162c;
+  --darker-theme-color: #02274b;
+  --dark-theme-color: #003d7a;
+  --medium-theme-color: #1e90ff;
+  --light-theme-color: #3493f2;
+  --lighter-theme-color: #76b7f7;
+  --lightest-theme-color: #bddeff;
+}
+
 .App {
+  font-family: optima, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
   text-align: center;
 }
 
@@ -14,17 +27,13 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: var(--darker-theme-color);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
+  color: var(--lightest-theme-color);
 }
 
 @keyframes App-logo-spin {

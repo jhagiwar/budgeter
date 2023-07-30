@@ -1,6 +1,7 @@
 import React, { useState, optionsState } from "react";
 import Papa from "papaparse";
 import { ButtonGroup } from "react-bootstrap";
+import './CSVSelector.css';
 
 // Allowed extensions for input file
 const allowedExtensions = ["csv"];
@@ -165,58 +166,54 @@ const CSVSelector = () => {
     }
 
     return (
-        <div>
-            <div className="creditCardType">
+        <div className="CSVSelector">
+            <div className="section creditCardType">
                 {isDiscoverToString()}
                 <div>
-                    <button onClick={() => setIsDiscover(!(isDiscover))}>Change Credit Card Company</button>
+                    <button className="creditCardTypeButton" onClick={() => setIsDiscover(!(isDiscover))}>Change Credit Card Company</button>
                 </div>
             </div>
-            <div className="CSV Proccessing">
+            <div className="CSVProccessing section">
                 <h2 htmlFor="csvInput" style={{ display: "block" }}>
                     Enter CSV File
                 </h2>
-                <input
-                    onChange={handleFileChange}
-                    id="csvInput"
-                    name="file"
-                    type="File"
-                />
+                <div className="choose-file-container">
+                    <input
+                        onChange={handleFileChange}
+                        id="csvInput"
+                        name="file"
+                        type="File"
+                    />
+                </div>
                 <div>
                     <button onClick={handleParse}>Parse</button>
                 </div>
             </div>
 
-            <div>
+            <div className="section ">
                 {transactionsIndex < transactionsAmount.length && indexToSingleTransactionDisplay(transactionsIndex)}
-                {transactionsIndex < transactionsAmount.length && <div className="categoryButtons">
-                    <h2>{selectedCategory}</h2>
-                    <button onClick={() => setSelectedCategory("Subscriptions")}>Subscriptions</button>
-                    <button onClick={() => setSelectedCategory("Groceries")}>Groceries</button>
-                    <button onClick={() => setSelectedCategory("Coffee")}>Coffee</button>
-                    <button onClick={() => setSelectedCategory("Tea")}>Tea</button>
-                    <button onClick={() => setSelectedCategory("Food Delivery")}>Food Dilivery</button>
-                    <button onClick={() => setSelectedCategory("Dining Out")}>Dining Out</button>
-                    <button onClick={() => setSelectedCategory("Toiletries")}>Toiletries</button>
-                    <button onClick={() => setSelectedCategory("Electricity/Wifi Bill")}>Electricity/Wifi Bill</button>
-                    <button onClick={() => setSelectedCategory("Fun/Activities")}>Activities</button>
-                    <button onClick={() => setSelectedCategory("Public Transportation")}>Public Transportation</button>
-                    <button onClick={() => setSelectedCategory("Uber/Lyft/Other")}>Uber/Lyft/Other</button>
-                    <button onClick={() => setSelectedCategory("Clothes")}>Clothes</button>
-                    <button onClick={() => setSelectedCategory("Medical")}>Medical</button>
-                    <button onClick={() => setSelectedCategory("Home")}>Home</button>
-                    <button onClick={() => setSelectedCategory("Other")}>Other</button>
+                <h2>{selectedCategory}</h2>
+                {transactionsIndex < transactionsAmount.length && <div className="categoryButtonsContainer">
+                    <button className="category-button" onClick={() => setSelectedCategory("Subscriptions")}>Subscriptions</button>
+                    <button className="category-button" onClick={() => setSelectedCategory("Groceries")}>Groceries</button>
+                    <button className="category-button" onClick={() => setSelectedCategory("Coffee")}>Coffee</button>
+                    <button className="category-button" onClick={() => setSelectedCategory("Tea")}>Tea</button>
+                    <button className="category-button" onClick={() => setSelectedCategory("Food Delivery")}>Food Dilivery</button>
+                    <button className="category-button" onClick={() => setSelectedCategory("Dining Out")}>Dining Out</button>
+                    <button className="category-button" onClick={() => setSelectedCategory("Toiletries")}>Toiletries</button>
+                    <button className="category-button" onClick={() => setSelectedCategory("Electricity/Wifi Bill")}>Electricity/Wifi Bill</button>
+                    <button className="category-button" onClick={() => setSelectedCategory("Fun/Activities")}>Activities</button>
+                    <button className="category-button" onClick={() => setSelectedCategory("Public Transportation")}>Public Transportation</button>
+                    <button className="category-button" onClick={() => setSelectedCategory("Uber/Lyft/Other")}>Uber/Lyft/Other</button>
+                    <button className="category-button" onClick={() => setSelectedCategory("Clothes")}>Clothes</button>
+                    <button className="category-button" onClick={() => setSelectedCategory("Medical")}>Medical</button>
+                    <button className="category-button" onClick={() => setSelectedCategory("Home")}>Home</button>
+                    <button className="category-button" onClick={() => setSelectedCategory("Other")}>Other</button>
                 </div >}
-                {console.log(transactionsAmount.length)}
-                {console.log(transactionsAmount)}
                 {transactionsIndex < transactionsAmount.length && <button onClick={handleNextTransaction}>Next Transaction</button>}
-                {transactionsIndex === transactionsAmount.length && <h2>Done! Categories Below</h2>}
-                {transactionsIndex === transactionsAmount.length && <div style={{ marginTop: "3rem" }}>
-                    {error ? error : transactionsCategory.map((col,
-                        idx) => <div key={idx}>{col}</div>)}
-                </div>}
+                {transactionsIndex === transactionsAmount.length && transactionsIndex !== 0 && <h2>Done! Download CSV of Categories Below</h2>}
                 <div>
-                    {transactionsIndex === transactionsAmount.length && <button onClick={() => exportToCsv("categories_for_" + file.filename, transactionsCategory)}>Download CSV of Categories</button>}
+                    {transactionsIndex === transactionsAmount.length && transactionsIndex !== 0 && <button onClick={() => exportToCsv("categories_for_" + file.name, transactionsCategory)}>Download CSV of Categories</button>}
                 </div>
             </div>
 

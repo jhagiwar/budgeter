@@ -1,0 +1,50 @@
+:root {
+    --darkest-theme-color: #00162c;
+    --darker-theme-color: #02274b;
+    --dark-theme-color: #003d7a;
+    --medium-theme-color: #1e90ff;
+    --light-theme-color: #3493f2;
+    --lighter-theme-color: #76b7f7;
+    --lightest-theme-color: #bddeff;
+}
+
+h2 {
+    color: var(--darker-theme-color);
+}
+
+.CSVSelector {
+    font-family: optima, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+}
+
+button {
+    background-color: var(--medium-theme-color);
+    border-color: var(--lightest-theme-color);
+    border-radius: 10px;
+    border-width: 5px;
+    padding: 10px;
+
+}
+
+button:hover {
+    background-color: var(--lighter-theme-color);
+}
+
+.categoryButtonsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.category-button {
+    margin: 10px;
+}
+
+
+.section {
+    display: flex;
+    flex-direction: column;
+
+}

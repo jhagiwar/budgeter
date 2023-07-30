@@ -1,6 +1,16 @@
+:root {
+  --darkest-theme-color: #00162c;
+  --darker-theme-color: #02274b;
+  --dark-theme-color: #003d7a;
+  --medium-theme-color: #1e90ff;
+  --light-theme-color: #3493f2;
+  --lighter-theme-color: #76b7f7;
+  --lightest-theme-color: #bddeff;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: optima, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
