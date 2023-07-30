@@ -41,10 +41,17 @@ public class BudgeterApplication {
         } else {
             System.out.println("Error please quit and restart");
         }
-        System.out.println("Enter Categories CSV Filename");
-        Scanner myObj3 = new Scanner(System.in);  // Create a Scanner object
-        String catfilename = myObj3.nextLine();  // Read user input
-        ArrayList<CategoryId> categories = parseCategoryCSV(catfilename);
+
+        String[] fileNameSplit = filename.split("/");
+        String categoryFilepath = "";
+        for (int j = 0; j < fileNameSplit.length; j++) {
+            if (j == fileNameSplit.length - 1) {
+                categoryFilepath = categoryFilepath + "/categories_for_" + fileNameSplit[j];
+            } else {
+                categoryFilepath = categoryFilepath + "/" + fileNameSplit[j];
+            }
+        }
+        ArrayList<CategoryId> categories = parseCategoryCSV(categoryFilepath);
 
 
         for (int i = 0; i < transactions.size(); i++) {
