@@ -194,29 +194,47 @@ const CSVSelector = () => {
                 {transactionsIndex < transactionsAmount.length && indexToSingleTransactionDisplay(transactionsIndex)}
                 <h2>{selectedCategory}</h2>
                 {transactionsIndex < transactionsAmount.length && <div className="categoryButtonsContainer">
-                    <button className="category-button" onClick={() => setSelectedCategory("Subscriptions")}>Subscriptions</button>
-                    <button className="category-button" onClick={() => setSelectedCategory("Groceries")}>Groceries</button>
-                    <button className="category-button" onClick={() => setSelectedCategory("Coffee")}>Coffee</button>
-                    <button className="category-button" onClick={() => setSelectedCategory("Tea")}>Tea</button>
-                    <button className="category-button" onClick={() => setSelectedCategory("Food Delivery")}>Food Dilivery</button>
-                    <button className="category-button" onClick={() => setSelectedCategory("Dining Out")}>Dining Out</button>
-                    <button className="category-button" onClick={() => setSelectedCategory("Toiletries")}>Toiletries</button>
-                    <button className="category-button" onClick={() => setSelectedCategory("Electricity/Wifi Bill")}>Electricity/Wifi Bill</button>
-                    <button className="category-button" onClick={() => setSelectedCategory("Fun/Activities")}>Activities</button>
-                    <button className="category-button" onClick={() => setSelectedCategory("Public Transportation")}>Public Transportation</button>
-                    <button className="category-button" onClick={() => setSelectedCategory("Uber/Lyft/Other")}>Uber/Lyft/Other</button>
-                    <button className="category-button" onClick={() => setSelectedCategory("Clothes")}>Clothes</button>
-                    <button className="category-button" onClick={() => setSelectedCategory("Medical")}>Medical</button>
-                    <button className="category-button" onClick={() => setSelectedCategory("Home")}>Home</button>
-                    <button className="category-button" onClick={() => setSelectedCategory("Other")}>Other</button>
+                    <button className="category-button" onClick={() => setSelectedCategory("Subscriptions")} onKeyDown={e => e.key === 'Enter' ? handleNextTransaction() :
+                        ''}>Subscriptions </button>
+                    <button className="category-button" onClick={() => setSelectedCategory("Groceries")} onKeyDown={e => e.key === 'Enter' ? handleNextTransaction() :
+                        ''}>Groceries</button>
+                    <button className="category-button" onClick={() => setSelectedCategory("Coffee")} onKeyDown={e => e.key === 'Enter' ? handleNextTransaction() :
+                        ''}>Coffee</button>
+                    <button className="category-button" onClick={() => setSelectedCategory("Tea")} onKeyDown={e => e.key === 'Enter' ? handleNextTransaction() :
+                        ''}>Tea</button>
+                    <button className="category-button" onClick={() => setSelectedCategory("Food Delivery")} onKeyDown={e => e.key === 'Enter' ? handleNextTransaction() :
+                        ''}>Food Dilivery</button>
+                    <button className="category-button" onClick={() => setSelectedCategory("Dining Out")} onKeyDown={e => e.key === 'Enter' ? handleNextTransaction() :
+                        ''}>Dining Out</button>
+                    <button className="category-button" onClick={() => setSelectedCategory("Toiletries")} onKeyDown={e => e.key === 'Enter' ? handleNextTransaction() :
+                        ''}>Toiletries</button>
                 </div >}
-                {transactionsIndex < transactionsAmount.length && <button onClick={handleNextTransaction}>Next Transaction</button>}
+                {transactionsIndex < transactionsAmount.length && <div className="categoryButtonsContainer">
+                    <button className="category-button" onClick={() => setSelectedCategory("Electricity/Wifi Bill")} onKeyDown={e => e.key === 'Enter' ? handleNextTransaction() :
+                        ''}>Electricity/Wifi Bill</button>
+                    <button className="category-button" onClick={() => setSelectedCategory("Fun/Activities")} onKeyDown={e => e.key === 'Enter' ? handleNextTransaction() :
+                        ''}>Activities</button>
+                    <button className="category-button" onClick={() => setSelectedCategory("Public Transportation")} onKeyDown={e => e.key === 'Enter' ? handleNextTransaction() :
+                        ''}>Public Transportation</button>
+                    <button className="category-button" onClick={() => setSelectedCategory("Uber/Lyft/Other")} onKeyDown={e => e.key === 'Enter' ? handleNextTransaction() :
+                        ''}>Uber/Lyft/Other</button>
+                    <button className="category-button" onClick={() => setSelectedCategory("Clothes")} onKeyDown={e => e.key === 'Enter' ? handleNextTransaction() :
+                        ''}>Clothes</button>
+                    <button className="category-button" onClick={() => setSelectedCategory("Medical")} onKeyDown={e => e.key === 'Enter' ? handleNextTransaction() :
+                        ''}>Medical</button>
+                    <button className="category-button" onClick={() => setSelectedCategory("Home")} onKeyDown={e => e.key === 'Enter' ? handleNextTransaction() :
+                        ''}>Home</button>
+                    <button className="category-button" onClick={() => setSelectedCategory("Other")} onKeyDown={e => e.key === 'Enter' ? handleNextTransaction() :
+                        ''}>Other</button>
+                </div >}
+                {transactionsIndex < transactionsAmount.length && <button onClick={handleNextTransaction} onKeyDown={e => e.key === 'Enter' ? handleNextTransaction() :
+                    ''}>Next Transaction</button>}
                 {transactionsIndex === transactionsAmount.length && transactionsIndex !== 0 && <h2>Done! Download CSV of Categories Below</h2>}
                 <div>
                     {transactionsIndex === transactionsAmount.length && transactionsIndex !== 0 && <button onClick={() => exportToCsv("categories_for_" + file.name, transactionsCategory)}>Download CSV of Categories</button>}
                 </div>
             </div>
-
+            <div className="extrablank"></div>
         </div >
     );
 };
